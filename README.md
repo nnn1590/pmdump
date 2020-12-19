@@ -129,3 +129,7 @@ pmdump_parser.py provides the function of parsing the dump to show information a
 ```bash
 python pmdump_parser.py output_pmdump.bin
 ```
+
+## License
+GPL-2.0-or-later
+Copyright (c) 2017 Jaeho Lee, Dan S. Wallach
