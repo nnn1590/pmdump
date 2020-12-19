@@ -131,5 +131,9 @@ python pmdump_parser.py output_pmdump.bin
 ```
 
 ## License
+pmdump:
 GPL-2.0-or-later
 Copyright (c) 2017 Jaeho Lee, Dan S. Wallach
+
+`pmdump_src/android-jni/jni/Android.mk` is based on this: https://github.com/android/ndk-samples/blob/android-mk/hello-jni/jni/Android.mk
+Apache-2.0 Copyright (C) 2009 The Android Open Source Project
