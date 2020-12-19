@@ -1,32 +1,31 @@
-### Require to change it to the correct your NDK path
-NDK := ~/Android/Sdk/ndk-bundle
+.PHONY: all clean x86 x86_64 arm arm64
 
-### May need to change it correctly
-TOOLCHAIN_x86 := $(NDK)/toolchains/x86-4.9/prebuilt/linux-x86_64/bin/i686-linux-android-gcc
-SYSROOT_x86 := $(NDK)/platforms/android-21/arch-x86
-
-TOOLCHAIN_x86_64 := $(NDK)/toolchains/x86_64-4.9/prebuilt/linux-x86_64/bin/x86_64-linux-android-gcc
-SYSROOT_x86_64 := $(NDK)/platforms/android-21/arch-x86_64
-
-TOOLCHAIN_arm := $(NDK)/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/bin/arm-linux-androideabi-gcc
-SYSROOT_arm := $(NDK)/platforms/android-21/arch-arm
-
-### 
-CFLAGS := -fPIE -pie
-
-all:
-	@echo "\n  Please specify Android architecture that you want to build"
-	@echo "    make (x86|x86_64|arm)"
+all: pmdump.c
+	echo 'APP_ABI := all' > android-jni/jni/Application.mk
+	cd android-jni && ndk-build
+	@echo binaries are here: android-jni/libs/\(architecture\)/pmdump
 
 x86: pmdump.c
-	$(TOOLCHAIN_x86) --sysroot $(SYSROOT_x86) $(CFLAGS) -o pmdump pmdump.c
+	echo 'APP_ABI := x86' > android-jni/jni/Application.mk
+	cd android-jni && ndk-build
+	@echo binary is here: android-jni/libs/x86/pmdump
 
 x86_64: pmdump.c
-	$(TOOLCHAIN_x86_64) --sysroot $(SYSROOT_x86_64) $(CFLAGS) -o pmdump pmdump.c
+	echo 'APP_ABI := x86_64' > android-jni/jni/Application.mk
+	cd android-jni && ndk-build
+	@echo binary is here: android-jni/libs/x86_64/pmdump
 	
 arm: pmdump.c
-	$(TOOLCHAIN_arm) --sysroot $(SYSROOT_arm) $(CFLAGS) -o pmdump pmdump.c
+	echo 'APP_ABI := armeabi-v7a' > android-jni/jni/Application.mk
+	cd android-jni && ndk-build
+	@echo binary is here: android-jni/libs/armeabi-v7a/pmdump
+
+arm64: pmdump.c
+	echo 'APP_ABI := arm64-v8a' > android-jni/jni/Application.mk
+	cd android-jni && ndk-build
+	@echo binary is here: android-jni/libs/arm64-v8a/pmdump
 
 clean:
-	rm -f *.o
-	rm -f pmdump
+	rm -f android-jni/jni/Application.mk
+	cd android-jni && ndk-build clean
+	rm -rf android-jni/libs android-jni/obj
