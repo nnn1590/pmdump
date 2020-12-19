@@ -11,7 +11,7 @@ There are prebuilt pmdump binaries in /pmdump_prebuilt_bin folder.
 They can be used to dump a process memory.
 To build, please refer to below the build instruction.
 
-pmdump_parser.py is also provided, which is a useful script that parses the memory dump file.
+`pmdump_parser.py` is also provided, which is a useful script that parses the memory dump file.
 
 ### pmdump
 
@@ -60,27 +60,12 @@ Example:
 
 Android NDK is required to build it. If Android SDK is installed, NDK-bundle that comes with Android SDK can be also used.
 
-First, modify pmdump_src/Makefile.android file to set the correct NDK path to $NDK variable. After modifying, run the following command.
+Run the following command.
 
 ```bash
 cd pmdump_src
-make -f Makefile.android (arm|x86|x86_64)
+make -f Makefile.android (all|arm|arm64|x86|x86_64)
 ``` 
-
-#### Tip: Use standalone_toolchain
-
-You can build it after making standalone_toolchain
-
-* ref: https://developer.android.com/ndk/guides/standalone_toolchain.html
-
-Following is the example of building after making the toolchain for arm architecture with API version 21.
-
-```bash
-cd <NDK>/build/tools
-python make_standalone_toolchain.py --arch arm --api 21 --install-dir /tmp/my-android-toolchain
-# Build
-/tmp/my-android-toolchain/bin/arm-linux-androideabi-gcc –sysroot /tmp/my-android-toolchain/sysroot -fPIE -pie -o pmdump pmdump.c
-```
 
 ### Ubuntu
 
