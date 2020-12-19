@@ -60,7 +60,7 @@ Example:
 
 Android NDK is required to build it. If Android SDK is installed, NDK-bundle that comes with Android SDK can be also used.
 
-Run the following command.
+Just run `ndk-build` command or use the following Makefile
 
 ```bash
 cd pmdump_src
@@ -69,7 +69,7 @@ make -f Makefile.android (all|arm|arm64|x86|x86_64)
 
 ### Ubuntu
 
-The build is simple. Just run gcc command or use the following Makefile
+The build is simple. Just run `gcc` command or use the following Makefile
 
 ```bash
 cd pmdump_src
